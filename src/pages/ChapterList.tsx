@@ -2,6 +2,14 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
+interface testOne {
+  test: string;
+}
+
+interface testTwo extends testOne {
+  testTwo: string;
+}
+
 const ChapterList = () => {
   const navigate = useNavigate();
   return (
