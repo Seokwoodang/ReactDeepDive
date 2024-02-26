@@ -1,18 +1,17 @@
 import React from "react";
 
 const First = () => {
-  const maxInteger = Number.MAX_SAFE_INTEGER;
-  // const bigInt1 = 9007199254740995n // 끝에 n을 붙이거나
-  // const bigInt2 = BigInt("9007199254740995"); // BigInt 함수를 사용하면 된다.
-  const number = 9007199254740992;
-  // const bigint = 9007199254740992n
+  type Hello = { [key in "hello" | "hi"]: string };
 
-  const symbol1 = Symbol("key2");
-  const symbol2 = Symbol("key2");
+  const hello: Hello = {
+    hello: "hellasdfo",
+    hi: "adsfhi",
+  };
 
-  // console.log(symbol1=== symbol2);
+  console.log(Object.values(hello));
+  console.log("ndndn");
 
-  return <div>First</div>;
+  return <div>typescriptdd</div>;
 };
 
 export default First;

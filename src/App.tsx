@@ -4,14 +4,6 @@ import First from "./pages/First";
 import ChapterList from "./pages/ChapterList";
 import FirstChapter from "./pages/FirstChapter";
 
-var hey = "global scope";
-function hello() {
-  console.log(hey);
-}
-console.log(hey); // global scope
-hello(); // global scope
-//
-
 function App() {
   return (
     <Routes>
