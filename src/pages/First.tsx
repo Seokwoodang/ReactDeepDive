@@ -8,9 +8,6 @@ const First = () => {
     hi: "adsfhi",
   };
 
-  console.log(Object.values(hello));
-  console.log("ndndn");
-
   return <div>typescriptdd</div>;
 };
 
