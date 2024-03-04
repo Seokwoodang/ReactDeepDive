@@ -1,16 +1,8 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import First from "./pages/First";
+import First from "./pages/SecondChapter";
 import ChapterList from "./pages/ChapterList";
 import FirstChapter from "./pages/FirstChapter";
-
-var hey = "global scope";
-function hello() {
-  console.log(hey);
-}
-console.log(hey); // global scope
-hello(); // global scope
-//
 
 function App() {
   return (
