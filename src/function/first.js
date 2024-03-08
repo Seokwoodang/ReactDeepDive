@@ -5,17 +5,27 @@
 // console.log((2).toString(2));
 // console.log((5).toString(2));
 
-function bar() {
-  console.log("bar");
-}
-function baz() {
-  console.log("baz");
-}
-// function foo() {
-//   console.log("foo");
-//   setTimeout(bar, 0); // setTimeout만 추가했다.
-//   baz();
+// function bar() {
+//   console.log("bar");
 // }
-// foo();
+// function baz() {
+//   console.log("baz");
+// }
+// // function foo() {
+// //   console.log("foo");
+// //   setTimeout(bar, 0); // setTimeout만 추가했다.
+// //   baz();
+// // }
+// // foo();
 
-setTimeout(bar(), 0);
+// setTimeout(bar(), 0);
+
+// function add(a) {
+//   return function (b) {
+//     return a + b;
+//   };
+// }
+// const result = add(1); // 여기서 result는 앞서 반환한 함수를 가리킨다.
+// console.log(result);
+// const result2 = result(2);
+// console.log(result2);
