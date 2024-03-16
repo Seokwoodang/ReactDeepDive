@@ -29,3 +29,35 @@
 // console.log(result);
 // const result2 = result(2);
 // console.log(result2);
+import { atom, useAtom, useAtomValue } from "jotai";
+const counterState = atom(0);
+function Counter() {
+  const [, setCount] = useAtom(counterState);
+  function handleButtonClick() {
+    setCount((count) => count + 1);
+  }
+  return (
+    <>
+      <button onClick={handleButtonClick}>+</button>
+    </>
+  );
+}
+const isBiggerThan10 = atom((get) => get(counterState) > 10);
+function Count() {
+  const count = useAtomValue(counterState);
+  const biggerThan10 = useAtomValue(isBiggerThan10);
+  return (
+    <>
+      <h3>{count}</h3>
+      <p>count is bigger than 10: {JSON.stringify(biggerThan10)}</p>
+    </>
+  );
+}
+export default function App() {
+  return (
+    <>
+      <Counter />
+      <Count />
+    </>
+  );
+}

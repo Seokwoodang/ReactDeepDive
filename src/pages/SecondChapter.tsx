@@ -83,27 +83,67 @@
 
 // export default SecondChapter;
 
-import { useState, useEffect } from "react";
-export default function SecondChapter() {
-  const [counter, setCounter] = useState(0);
+// import { useState, useEffect } from "react";
+// export default function SecondChapter() {
+//   const [counter, setCounter] = useState(0);
+//   function handleClick() {
+//     setCounter((prev) => prev + 1);
+//   }
+//   useEffect(() => {
+//     function addMouseEvent() {
+//       console.log(counter);
+//     }
+//     window.addEventListener("click", addMouseEvent);
+//     // 클린업 함수
+//     return () => {
+//       console.log("클린업 함수 실행!", counter);
+//       window.removeEventListener("click", addMouseEvent);
+//     };
+//   }, [counter]);
+//   // 하나의 요소로 구성된 가장 단순한 형태
+
+//   return (
+//     <>
+//       <h1>{counter}</h1>
+//       <button onClick={handleClick}>+</button>
+
+//       <div></div>
+//       <div />
+//       <></>
+//     </>
+//   );
+// }
+
+// counter.ts
+export type State = { counter: number };
+// 상태를 아예 컴포넌트 밖에 선언했다. 각 컴포넌트가 이 상태를 바라보게 할 것이다.
+let state: State = {
+  counter: 0,
+};
+// getter
+export function get(): State {
+  return state;
+}
+// useState와 동일하게 구현하기 위해 게으른 초기화 함수나 값을 받을 수 있게 했다.
+type Initializer<T> = T extends any ? T | ((prev: T) => T) : never;
+// setter
+export function set<T>(nextState: Initializer<T>) {
+  state = typeof nextState === "function" ? nextState(state) : nextState;
+}
+// Counter
+function Counter() {
+  const state = get();
+  console.log(state);
+
   function handleClick() {
-    setCounter((prev) => prev + 1);
+    set((prev: State) => ({ counter: prev.counter + 1 }));
   }
-  useEffect(() => {
-    function addMouseEvent() {
-      console.log(counter);
-    }
-    window.addEventListener("click", addMouseEvent);
-    // 클린업 함수
-    return () => {
-      console.log("클린업 함수 실행!", counter);
-      window.removeEventListener("click", addMouseEvent);
-    };
-  }, [counter]);
   return (
     <>
-      <h1>{counter}</h1>
+      <h3>{state.counter}</h3>
       <button onClick={handleClick}>+</button>
     </>
   );
 }
+
+export default Counter;
