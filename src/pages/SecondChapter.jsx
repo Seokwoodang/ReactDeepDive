@@ -115,35 +115,72 @@
 // }
 
 // counter.ts
-export type State = { counter: number };
-// 상태를 아예 컴포넌트 밖에 선언했다. 각 컴포넌트가 이 상태를 바라보게 할 것이다.
-let state: State = {
-  counter: 0,
-};
-// getter
-export function get(): State {
-  return state;
-}
-// useState와 동일하게 구현하기 위해 게으른 초기화 함수나 값을 받을 수 있게 했다.
-type Initializer<T> = T extends any ? T | ((prev: T) => T) : never;
-// setter
-export function set<T>(nextState: Initializer<T>) {
-  state = typeof nextState === "function" ? nextState(state) : nextState;
-}
-// Counter
-function Counter() {
-  const state = get();
-  console.log(state);
+// export type State = { counter: number };
+// // 상태를 아예 컴포넌트 밖에 선언했다. 각 컴포넌트가 이 상태를 바라보게 할 것이다.
+// let state: State = {
+//   counter: 0,
+// };
+// // getter
+// export function get(): State {
+//   return state;
+// }
+// // useState와 동일하게 구현하기 위해 게으른 초기화 함수나 값을 받을 수 있게 했다.
+// type Initializer<T> = T extends any ? T | ((prev: T) => T) : never;
+// // setter
+// export function set<T>(nextState: Initializer<T>) {
+//   state = typeof nextState === "function" ? nextState(state) : nextState;
+// }
+// // Counter
+// function Counter() {
+//   const state = get();
+//   console.log(state);
 
-  function handleClick() {
-    set((prev: State) => ({ counter: prev.counter + 1 }));
+//   function handleClick() {
+//     set((prev: State) => ({ counter: prev.counter + 1 }));
+//   }
+//   return (
+//     <>
+//       <h3>{state.counter}</h3>
+//       <button onClick={handleClick}>+</button>
+//     </>
+//   );
+// }
+
+// export default Counter;
+
+import React from "react";
+
+const SecondChapter = () => {
+  //
+  const makeCounter = () => {
+    let counter = 0;
+
+    return function () {
+      counter = counter + 1;
+      return counter;
+    };
+  };
+
+  function increase(n) {
+    return ++n;
   }
-  return (
-    <>
-      <h3>{state.counter}</h3>
-      <button onClick={handleClick}>+</button>
-    </>
-  );
-}
 
-export default Counter;
+  // 보조 함수
+  function decrease(n) {
+    return --n;
+  }
+
+  const increaser = makeCounter();
+  console.log(increaser()); // 1
+  console.log(increaser()); // 2
+
+  // increaser 함수와는 별개의 독립된 렉시컬 환경을 갖기 때문에 카운터 상태가 연동하지 않는다.
+  const decreaser = makeCounter();
+  console.log(decreaser()); // -1
+  console.log(increaser()); // 3
+  console.log(decreaser()); // -2
+
+  return <div>SecondChapter</div>;
+};
+
+export default SecondChapter;
